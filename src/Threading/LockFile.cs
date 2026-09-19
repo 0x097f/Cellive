@@ -1,61 +1,56 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-
-namespace CilDotNet.Threading
+﻿namespace CilDotNet.Threading
 {
     public sealed class LockFile : IDisposable
     {
-        private readonly string _filePath;
-        private FileStream? _fileStream;
-        private bool _locked;
+        private readonly string filePath = string.Empty;
+        private FileStream? fileStream;
+        private bool locked;
 
-        public LockFile(string filePath)
+        public LockFile()
         {
-            _filePath = filePath;
             Lock();
         }
 
         public void Lock()
         {
-            if (_locked) return;
+            if (locked) return;
 
             try
             {
-                var dir = Path.GetDirectoryName(_filePath);
+                var dir = Path.GetDirectoryName(filePath);
                 if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
 
-                _fileStream = new FileStream(
-                    _filePath,
+                fileStream = new FileStream(
+                    filePath,
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite,
                     FileShare.None
                 );
-                _locked = true;
+                locked = true;
             }
             catch
             {
-                _locked = false;
+                locked = false;
             }
         }
 
         public void Unlock()
         {
-            if (!_locked) return;
+            if (!locked) return;
 
             try
             {
-                _fileStream?.Close();
-                _fileStream?.Dispose();
-                _fileStream = null;
-                _locked = false;
+                fileStream?.Close();
+                fileStream?.Dispose();
+                fileStream = null;
+                locked = false;
 
-                if (File.Exists(_filePath))
+                if (File.Exists(filePath))
                 {
-                    File.Delete(_filePath);
+                    File.Delete(filePath);
                 }
             }
             catch { }
@@ -63,11 +58,11 @@ namespace CilDotNet.Threading
 
         public bool FileLocked()
         {
-            if (!File.Exists(_filePath)) return false;
+            if (!File.Exists(filePath)) return false;
 
             try
             {
-                using var fs = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+                using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
                 return false;
             }
             catch
@@ -76,9 +71,6 @@ namespace CilDotNet.Threading
             }
         }
 
-        public void Dispose()
-        {
-            Unlock();
-        }
+        public void Dispose() => Unlock();
     }
 }

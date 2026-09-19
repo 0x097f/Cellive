@@ -1,33 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-<PropertyGroup>
-  <TargetFramework>net10.0</TargetFramework>
-  <ImplicitUsings>enable</ImplicitUsings>
-  <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
 
-  <!-- Package Id -->
-  <PackageId>CilDotNet</PackageId>
-  <Version>1.0.0</Version>
-  <RootNamespace>CilDotNet</RootNamespace>
-  <PackageId>CilDotNet</PackageId>
-  <ImplicitUsings>enable</ImplicitUsings>
-  <DebugType>portable</DebugType>
-  <GenerateDependencyFile>false</GenerateDependencyFile>
-  <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
-  <Authors>0x097f</Authors>
-  <Description>Cil Manipulation library</Description>
-		
-  <!--Platform targeting-->
-  <EnableWindowsTargeting>true</EnableWindowsTargeting>
-  <EnableLinuxTargeting>true</EnableLinuxTargeting>
-  <EnableMacOSTargeting>true</EnableMacOSTargeting>
-  <!-- Constants -->
-  <DefineConstants Condition="'$(OS)' == 'Windows_NT'">WINDOWS</DefineConstants>
-  <DefineConstants Condition="'$(OS)' == 'Unix' And $(RuntimeIdentifier.StartsWith('linux'))">LINUX</DefineConstants>
-  <DefineConstants Condition="'$(OS)' == 'Unix' And $(RuntimeIdentifier.StartsWith('osx'))">MACOS</DefineConstants>
-</PropertyGroup>
+    <!-- Package Id -->
+    <PackageId>CilDotNet</PackageId>
+    <Version>1.0.0</Version>
+    <RootNamespace>CilDotNet</RootNamespace>
+    <DebugType>portable</DebugType>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Authors>0x097f</Authors>
+    <Description>A Cil Manipulation library</Description>
 
-<ItemGroup>
-  <Folder Include="Writer\" />
-</ItemGroup>
+    <!-- Platform targeting -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <EnableLinuxTargeting>true</EnableLinuxTargeting>
+    <EnableMacOSTargeting>true</EnableMacOSTargeting>
+
+    <!-- Constants -->
+    <DefineConstants Condition="'$(OS)' == 'Windows_NT'">WINDOWS</DefineConstants>
+    <DefineConstants Condition="'$(OS)' == 'Unix' And $(RuntimeIdentifier.StartsWith('linux'))">LINUX</DefineConstants>
+    <DefineConstants Condition="'$(OS)' == 'Unix' And $(RuntimeIdentifier.StartsWith('osx'))">MACOS</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Iced" Version="1.21.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Writer\" />
+  </ItemGroup>
+
 </Project>

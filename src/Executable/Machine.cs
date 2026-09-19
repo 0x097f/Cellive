@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CilDotNet.Executable
+﻿namespace CilDotNet.Executable
 {
     [Flags]
     public enum Architectures : ushort

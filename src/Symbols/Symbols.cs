@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Semicolon.Cil.Symbols
+﻿namespace CilDotNet.Symbols
 {
     public class Symbols
     {

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Reflection;
-
-namespace Semicolon.Cil.Definitions
+﻿namespace CilDotNet.Cil.Definitions
 {
     /// <summary>
-    /// Type attributes
-    /// Reference:https://learn.microsoft.com/dotnet/framework/unmanaged-api/metadata/cortypeattr-enumeration
+    ///Type attributes
+    ///Reference:https://learn.microsoft.com/dotnet/framework/unmanaged-api/metadata/cortypeattr-enumeration
     /// </summary>
     [Flags]
     public enum TypeAttributes
     {
         VisibilityMask = 0x00000007,
 
-        // Not public (internal/private)
+        //Not public (internal/private)
         NotPublic = 0x00000000,
 
         //Public
@@ -24,10 +21,10 @@ namespace Semicolon.Cil.Definitions
         //privare
         NestedPrivate = 0x00000003,
 
-        // protected family
+        //protected family
         NestedFamily = 0x00000004,
 
-        // internal
+        //internal
         NestedAssembly = 0x00000005,
 
         //protected internal
@@ -38,13 +35,13 @@ namespace Semicolon.Cil.Definitions
         AutoLayout = 0x00000000,
         SequentialLayout = 0x00000008,
         ExplicitLayout = 0x00000010,
-        // (Extended) Add in .NET7+
+        //(Extended) Add in .NET7+
         ExtendedLayout        = 0x00000018, 
         
         ClassSemanticsMask = 0x00000020,
         Class = 0x00000000,
 
-        // Interface
+        //Interface
         Interface = 0x00000020,
 
         //Special semantics
@@ -56,7 +53,7 @@ namespace Semicolon.Cil.Definitions
         RTSpecialName = 0x00000800,
 
         Import = 0x00001000,
-        [Obsolete("This flag is already obsolete.Please use System.SerializableAttribute attribute.")]
+        [Obsolete("This flag is obsolete.Please use System.SerializableAttribute attribute.")]
         Serializable = 0x00002000,
 
         WindowsRuntime = 0x00004000,
@@ -70,7 +67,7 @@ namespace Semicolon.Cil.Definitions
         CustomFormatClass = 0x00030000,
         CustomFormatMask = 0x00C00000,
 
-        // .cctor
+        //.cctor
         BeforeFieldInit = 0x00100000,
         Forwarder = 0x00200000,
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CilDotNet.Executable
+﻿namespace CilDotNet.Executable
 {
     public readonly struct Rva : IEquatable<Rva>
     {

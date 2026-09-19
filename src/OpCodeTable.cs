@@ -1,257 +1,474 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace CilDotNet
+﻿namespace CilDotNet
 {
-    public enum OpCodeCategories : ushort
+    public static class OpCodeTable
     {
-        Nop = 0x00,
+        private static readonly Dictionary<OpCodeCategories, OpCode> opCodes = new();
 
-        Break = 0x01,
-        
-        Ldarg0 = 0x02,
-        Ldarg1 = 0x03,
-        Ldarg2 = 0x04,
-        Ldarg3 = 0x05,
-        Ldloc0 = 0x06,
-        Ldloc1 = 0x07,
-        Ldloc2 = 0x08,
-        Ldloc3 = 0x09,
-        
-        Stloc0 = 0x0A,
-        Stloc1 = 0x0B,
-        Stloc2 = 0x0C,
-        Stloc3 = 0x0D,
-        
-        LdargS = 0x0E,
-        LdargaS = 0x0F,
-        StargS = 0x10,
-        LdlocS = 0x11,
-        LdlocaS = 0x12,
-        StlocS = 0x13,
-        
-        Ldnull = 0x14,
-        LdcI4M1 = 0x15,
-        LdcI4_0 = 0x16,
-        LdcI4_1 = 0x17,
-        LdcI4_2 = 0x18,
-        LdcI4_3 = 0x19,
-        LdcI4_4 = 0x1A,
-        LdcI4_5 = 0x1B,
-        LdcI4_6 = 0x1C,
-        LdcI4_7 = 0x1D,
-        LdcI4_8 = 0x1E,
-        LdcI4S = 0x1F,
-        LdcI4 = 0x20,
-        LdcI8 = 0x21,
-        LdcR4 = 0x22,
-        LdcR8 = 0x23,
+        public static readonly OpCode Nop;
+        public static readonly OpCode Break;
+        public static readonly OpCode Ldarg0;
+        public static readonly OpCode Ldarg1;
+        public static readonly OpCode Ldarg2;
+        public static readonly OpCode Ldarg3;
+        public static readonly OpCode Ldloc0;
+        public static readonly OpCode Ldloc1;
+        public static readonly OpCode Ldloc2;
+        public static readonly OpCode Ldloc3;
+        public static readonly OpCode Stloc0;
+        public static readonly OpCode Stloc1;
+        public static readonly OpCode Stloc2;
+        public static readonly OpCode Stloc3;
+        public static readonly OpCode LdargS;
+        public static readonly OpCode LdargaS;
+        public static readonly OpCode StargS;
+        public static readonly OpCode LdlocS;
+        public static readonly OpCode LdlocaS;
+        public static readonly OpCode StlocS;
+        public static readonly OpCode Ldnull;
+        public static readonly OpCode LdcI4M1;
+        public static readonly OpCode LdcI4_0;
+        public static readonly OpCode LdcI4_1;
+        public static readonly OpCode LdcI4_2;
+        public static readonly OpCode LdcI4_3;
+        public static readonly OpCode LdcI4_4;
+        public static readonly OpCode LdcI4_5;
+        public static readonly OpCode LdcI4_6;
+        public static readonly OpCode LdcI4_7;
+        public static readonly OpCode LdcI4_8;
+        public static readonly OpCode LdcI4S;
+        public static readonly OpCode LdcI4;
+        public static readonly OpCode LdcI8;
+        public static readonly OpCode LdcR4;
+        public static readonly OpCode LdcR8;
+        public static readonly OpCode Dup;
+        public static readonly OpCode Pop;
+        public static readonly OpCode Jmp;
+        public static readonly OpCode Call;
+        public static readonly OpCode Calli;
+        public static readonly OpCode Ret;
+        public static readonly OpCode BrS;
+        public static readonly OpCode BrfalseS;
+        public static readonly OpCode BrtrueS;
+        public static readonly OpCode BeqS;
+        public static readonly OpCode BgeS;
+        public static readonly OpCode BgtS;
+        public static readonly OpCode BleS;
+        public static readonly OpCode BltS;
+        public static readonly OpCode BneUnS;
+        public static readonly OpCode BgeUnS;
+        public static readonly OpCode BgtUnS;
+        public static readonly OpCode BleUnS;
+        public static readonly OpCode BltUnS;
+        public static readonly OpCode Br;
+        public static readonly OpCode Brfalse;
+        public static readonly OpCode Brtrue;
+        public static readonly OpCode Beq;
+        public static readonly OpCode Bge;
+        public static readonly OpCode Bgt;
+        public static readonly OpCode Ble;
+        public static readonly OpCode Blt;
+        public static readonly OpCode BneUn;
+        public static readonly OpCode BgeUn;
+        public static readonly OpCode BgtUn;
+        public static readonly OpCode BleUn;
+        public static readonly OpCode BltUn;
+        public static readonly OpCode Switch;
+        public static readonly OpCode LdindI1;
+        public static readonly OpCode LdindU1;
+        public static readonly OpCode LdindI2;
+        public static readonly OpCode LdindU2;
+        public static readonly OpCode LdindI4;
+        public static readonly OpCode LdindU4;
+        public static readonly OpCode LdindI8;
+        public static readonly OpCode LdindI;
+        public static readonly OpCode LdindR4;
+        public static readonly OpCode LdindR8;
+        public static readonly OpCode LdindRef;
+        public static readonly OpCode StindRef;
+        public static readonly OpCode StindI1;
+        public static readonly OpCode StindI2;
+        public static readonly OpCode StindI4;
+        public static readonly OpCode StindI8;
+        public static readonly OpCode StindR4;
+        public static readonly OpCode StindR8;
+        public static readonly OpCode StindI;
+        public static readonly OpCode Add;
+        public static readonly OpCode Sub;
+        public static readonly OpCode Mul;
+        public static readonly OpCode Div;
+        public static readonly OpCode DivUn;
+        public static readonly OpCode Rem;
+        public static readonly OpCode RemUn;
+        public static readonly OpCode And;
+        public static readonly OpCode Or;
+        public static readonly OpCode Xor;
+        public static readonly OpCode Shl;
+        public static readonly OpCode Shr;
+        public static readonly OpCode ShrUn;
+        public static readonly OpCode Neg;
+        public static readonly OpCode Not;
+        public static readonly OpCode ConvI1;
+        public static readonly OpCode ConvI2;
+        public static readonly OpCode ConvI4;
+        public static readonly OpCode ConvI8;
+        public static readonly OpCode ConvR4;
+        public static readonly OpCode ConvR8;
+        public static readonly OpCode ConvU4;
+        public static readonly OpCode ConvU8;
+        public static readonly OpCode Callvirt;
+        public static readonly OpCode Cpobj;
+        public static readonly OpCode Ldobj;
+        public static readonly OpCode Ldstr;
+        public static readonly OpCode Newobj;
+        public static readonly OpCode Castclass;
+        public static readonly OpCode Isinst;
+        public static readonly OpCode ConvRUn;
+        public static readonly OpCode Unbox;
+        public static readonly OpCode Throw;
+        public static readonly OpCode Ldfld;
+        public static readonly OpCode Ldflda;
+        public static readonly OpCode Stfld;
+        public static readonly OpCode Ldsfld;
+        public static readonly OpCode Ldsflda;
+        public static readonly OpCode Stsfld;
+        public static readonly OpCode Stobj;
+        public static readonly OpCode ConvOvfI1Un;
+        public static readonly OpCode ConvOvfI2Un;
+        public static readonly OpCode ConvOvfI4Un;
+        public static readonly OpCode ConvOvfI8Un;
+        public static readonly OpCode ConvOvfU1Un;
+        public static readonly OpCode ConvOvfU2Un;
+        public static readonly OpCode ConvOvfU4Un;
+        public static readonly OpCode ConvOvfU8Un;
+        public static readonly OpCode ConvOvfIUn;
+        public static readonly OpCode ConvOvfUUn;
+        public static readonly OpCode Box;
+        public static readonly OpCode Newarr;
+        public static readonly OpCode Ldlen;
+        public static readonly OpCode Ldelema;
+        public static readonly OpCode LdelemI1;
+        public static readonly OpCode LdelemU1;
+        public static readonly OpCode LdelemI2;
+        public static readonly OpCode LdelemU2;
+        public static readonly OpCode LdelemI4;
+        public static readonly OpCode LdelemU4;
+        public static readonly OpCode LdelemI8;
+        public static readonly OpCode LdelemI;
+        public static readonly OpCode LdelemR4;
+        public static readonly OpCode LdelemR8;
+        public static readonly OpCode LdelemRef;
+        public static readonly OpCode StelemI;
+        public static readonly OpCode StelemI1;
+        public static readonly OpCode StelemI2;
+        public static readonly OpCode StelemI4;
+        public static readonly OpCode StelemI8;
+        public static readonly OpCode StelemR4;
+        public static readonly OpCode StelemR8;
+        public static readonly OpCode StelemRef;
+        public static readonly OpCode LdelemAny;
+        public static readonly OpCode StelemAny;
+        public static readonly OpCode UnboxAny;
+        public static readonly OpCode ConvOvfI1;
+        public static readonly OpCode ConvOvfU1;
+        public static readonly OpCode ConvOvfI2;
+        public static readonly OpCode ConvOvfU2;
+        public static readonly OpCode ConvOvfI4;
+        public static readonly OpCode ConvOvfU4;
+        public static readonly OpCode ConvOvfI8;
+        public static readonly OpCode ConvOvfU8;
+        public static readonly OpCode Refanyval;
+        public static readonly OpCode Ckfinite;
+        public static readonly OpCode Mkrefany;
+        public static readonly OpCode Ldtoken;
+        public static readonly OpCode ConvU2;
+        public static readonly OpCode ConvU1;
+        public static readonly OpCode ConvI;
+        public static readonly OpCode ConvOvfI;
+        public static readonly OpCode ConvOvfU;
+        public static readonly OpCode AddOvf;
+        public static readonly OpCode AddOvfUn;
+        public static readonly OpCode MulOvf;
+        public static readonly OpCode MulOvfUn;
+        public static readonly OpCode SubOvf;
+        public static readonly OpCode SubOvfUn;
+        public static readonly OpCode Endfinally;
+        public static readonly OpCode Leave;
+        public static readonly OpCode LeaveS;
+        public static readonly OpCode ConvU;
+        public static readonly OpCode Arglist;
+        public static readonly OpCode Ceq;
+        public static readonly OpCode Cgt;
+        public static readonly OpCode CgtUn;
+        public static readonly OpCode Clt;
+        public static readonly OpCode CltUn;
+        public static readonly OpCode Ldftn;
+        public static readonly OpCode Ldvirtftn;
+        public static readonly OpCode Ldarg;
+        public static readonly OpCode Ldarga;
+        public static readonly OpCode Starg;
+        public static readonly OpCode Ldloc;
+        public static readonly OpCode Ldloca;
+        public static readonly OpCode Stloc;
+        public static readonly OpCode Localloc;
+        public static readonly OpCode Endfilter;
+        public static readonly OpCode Unaligned;
+        public static readonly OpCode Volatile;
+        public static readonly OpCode Tail;
+        public static readonly OpCode Initobj;
+        public static readonly OpCode Constrained;
+        public static readonly OpCode Cpblk;
+        public static readonly OpCode Initblk;
+        public static readonly OpCode Rethrow;
+        public static readonly OpCode Sizeof;
+        public static readonly OpCode Refanytype;
+        public static readonly OpCode Readonly;
 
-        Dup = 0x25,
-        Pop = 0x26,
-        Jmp = 0x27,
-        Call = 0x28,
-        Calli = 0x29,
-        Ret = 0x2A,
+        static OpCodeTable()
+        {
+            Nop = Register("nop", OpCodeCategories.Nop, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Break = Register("break", OpCodeCategories.Break, OperandType.None, CilDotNet.Cil.FlowControl.Branch);
+            Ldarg0 = Register("ldarg.0", OpCodeCategories.Ldarg0, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldarg1 = Register("ldarg.1", OpCodeCategories.Ldarg1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldarg2 = Register("ldarg.2", OpCodeCategories.Ldarg2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldarg3 = Register("ldarg.3", OpCodeCategories.Ldarg3, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldloc0 = Register("ldloc.0", OpCodeCategories.Ldloc0, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldloc1 = Register("ldloc.1", OpCodeCategories.Ldloc1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldloc2 = Register("ldloc.2", OpCodeCategories.Ldloc2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldloc3 = Register("ldloc.3", OpCodeCategories.Ldloc3, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Stloc0 = Register("stloc.0", OpCodeCategories.Stloc0, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Stloc1 = Register("stloc.1", OpCodeCategories.Stloc1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Stloc2 = Register("stloc.2", OpCodeCategories.Stloc2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Stloc3 = Register("stloc.3", OpCodeCategories.Stloc3, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdargS = Register("ldarg.s", OpCodeCategories.LdargS, OperandType.ShortInlineParam, CilDotNet.Cil.FlowControl.Next);
+            LdargaS = Register("ldarga.s", OpCodeCategories.LdargaS, OperandType.ShortInlineParam, CilDotNet.Cil.FlowControl.Next);
+            StargS = Register("starg.s", OpCodeCategories.StargS, OperandType.ShortInlineParam, CilDotNet.Cil.FlowControl.Next);
+            LdlocS = Register("ldloc.s", OpCodeCategories.LdlocS, OperandType.ShortInlineVar, CilDotNet.Cil.FlowControl.Next);
+            LdlocaS = Register("ldloca.s", OpCodeCategories.LdlocaS, OperandType.ShortInlineVar, CilDotNet.Cil.FlowControl.Next);
+            StlocS = Register("stloc.s", OpCodeCategories.StlocS, OperandType.ShortInlineVar, CilDotNet.Cil.FlowControl.Next);
+            Ldnull = Register("ldnull", OpCodeCategories.Ldnull, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4M1 = Register("ldc.i4.m1", OpCodeCategories.LdcI4M1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_0 = Register("ldc.i4.0", OpCodeCategories.LdcI4_0, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_1 = Register("ldc.i4.1", OpCodeCategories.LdcI4_1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_2 = Register("ldc.i4.2", OpCodeCategories.LdcI4_2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_3 = Register("ldc.i4.3", OpCodeCategories.LdcI4_3, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_4 = Register("ldc.i4.4", OpCodeCategories.LdcI4_4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_5 = Register("ldc.i4.5", OpCodeCategories.LdcI4_5, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_6 = Register("ldc.i4.6", OpCodeCategories.LdcI4_6, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_7 = Register("ldc.i4.7", OpCodeCategories.LdcI4_7, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4_8 = Register("ldc.i4.8", OpCodeCategories.LdcI4_8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdcI4S = Register("ldc.i4.s", OpCodeCategories.LdcI4S, OperandType.ShortInlineI, CilDotNet.Cil.FlowControl.Next);
+            LdcI4 = Register("ldc.i4", OpCodeCategories.LdcI4, OperandType.InlineI, CilDotNet.Cil.FlowControl.Next);
+            LdcI8 = Register("ldc.i8", OpCodeCategories.LdcI8, OperandType.InlineI8, CilDotNet.Cil.FlowControl.Next);
+            LdcR4 = Register("ldc.r4", OpCodeCategories.LdcR4, OperandType.ShortInlineR, CilDotNet.Cil.FlowControl.Next);
+            LdcR8 = Register("ldc.r8", OpCodeCategories.LdcR8, OperandType.InlineR, CilDotNet.Cil.FlowControl.Next);
+            Dup = Register("dup", OpCodeCategories.Dup, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Pop = Register("pop", OpCodeCategories.Pop, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Jmp = Register("jmp", OpCodeCategories.Jmp, OperandType.InlineMethod, CilDotNet.Cil.FlowControl.Call);
+            Call = Register("call", OpCodeCategories.Call, OperandType.InlineMethod, CilDotNet.Cil.FlowControl.Call);
+            Calli = Register("calli", OpCodeCategories.Calli, OperandType.InlineSig, CilDotNet.Cil.FlowControl.Call);
+            Ret = Register("ret", OpCodeCategories.Ret, OperandType.None, CilDotNet.Cil.FlowControl.Return);
+            BrS = Register("br.s", OpCodeCategories.BrS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.Branch);
+            BrfalseS = Register("brfalse.s", OpCodeCategories.BrfalseS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BrtrueS = Register("brtrue.s", OpCodeCategories.BrtrueS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BeqS = Register("beq.s", OpCodeCategories.BeqS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BgeS = Register("bge.s", OpCodeCategories.BgeS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BgtS = Register("bgt.s", OpCodeCategories.BgtS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BleS = Register("ble.s", OpCodeCategories.BleS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BltS = Register("blt.s", OpCodeCategories.BltS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BneUnS = Register("bne.un.s", OpCodeCategories.BneUnS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BgeUnS = Register("bge.un.s", OpCodeCategories.BgeUnS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BgtUnS = Register("bgt.un.s", OpCodeCategories.BgtUnS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BleUnS = Register("ble.un.s", OpCodeCategories.BleUnS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BltUnS = Register("blt.un.s", OpCodeCategories.BltUnS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Br = Register("br", OpCodeCategories.Br, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.Branch);
+            Brfalse = Register("brfalse", OpCodeCategories.Brfalse, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Brtrue = Register("brtrue", OpCodeCategories.Brtrue, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Beq = Register("beq", OpCodeCategories.Beq, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Bge = Register("bge", OpCodeCategories.Bge, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Bgt = Register("bgt", OpCodeCategories.Bgt, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Ble = Register("ble", OpCodeCategories.Ble, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Blt = Register("blt", OpCodeCategories.Blt, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BneUn = Register("bne.un", OpCodeCategories.BneUn, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BgeUn = Register("bge.un", OpCodeCategories.BgeUn, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BgtUn = Register("bgt.un", OpCodeCategories.BgtUn, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BleUn = Register("ble.un", OpCodeCategories.BleUn, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            BltUn = Register("blt.un", OpCodeCategories.BltUn, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.CondBranch);
+            Switch = Register("switch", OpCodeCategories.Switch, OperandType.InlineSwitch, CilDotNet.Cil.FlowControl.CondBranch);
+            LdindI1 = Register("ldind.i1", OpCodeCategories.LdindI1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindU1 = Register("ldind.u1", OpCodeCategories.LdindU1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindI2 = Register("ldind.i2", OpCodeCategories.LdindI2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindU2 = Register("ldind.u2", OpCodeCategories.LdindU2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindI4 = Register("ldind.i4", OpCodeCategories.LdindI4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindU4 = Register("ldind.u4", OpCodeCategories.LdindU4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindI8 = Register("ldind.i8", OpCodeCategories.LdindI8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindI = Register("ldind.i", OpCodeCategories.LdindI, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindR4 = Register("ldind.r4", OpCodeCategories.LdindR4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindR8 = Register("ldind.r8", OpCodeCategories.LdindR8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdindRef = Register("ldind.ref", OpCodeCategories.LdindRef, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindRef = Register("stind.ref", OpCodeCategories.StindRef, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindI1 = Register("stind.i1", OpCodeCategories.StindI1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindI2 = Register("stind.i2", OpCodeCategories.StindI2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindI4 = Register("stind.i4", OpCodeCategories.StindI4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindI8 = Register("stind.i8", OpCodeCategories.StindI8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindR4 = Register("stind.r4", OpCodeCategories.StindR4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindR8 = Register("stind.r8", OpCodeCategories.StindR8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StindI = Register("stind.i", OpCodeCategories.StindI, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Add = Register("add", OpCodeCategories.Add, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Sub = Register("sub", OpCodeCategories.Sub, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Mul = Register("mul", OpCodeCategories.Mul, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Div = Register("div", OpCodeCategories.Div, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            DivUn = Register("div.un", OpCodeCategories.DivUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Rem = Register("rem", OpCodeCategories.Rem, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            RemUn = Register("rem.un", OpCodeCategories.RemUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            And = Register("and", OpCodeCategories.And, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Or = Register("or", OpCodeCategories.Or, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Xor = Register("xor", OpCodeCategories.Xor, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Shl = Register("shl", OpCodeCategories.Shl, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Shr = Register("shr", OpCodeCategories.Shr, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ShrUn = Register("shr.un", OpCodeCategories.ShrUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Neg = Register("neg", OpCodeCategories.Neg, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Not = Register("not", OpCodeCategories.Not, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvI1 = Register("conv.i1", OpCodeCategories.ConvI1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvI2 = Register("conv.i2", OpCodeCategories.ConvI2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvI4 = Register("conv.i4", OpCodeCategories.ConvI4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvI8 = Register("conv.i8", OpCodeCategories.ConvI8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvR4 = Register("conv.r4", OpCodeCategories.ConvR4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvR8 = Register("conv.r8", OpCodeCategories.ConvR8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvU4 = Register("conv.u4", OpCodeCategories.ConvU4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvU8 = Register("conv.u8", OpCodeCategories.ConvU8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Callvirt = Register("callvirt", OpCodeCategories.Callvirt, OperandType.InlineMethod, CilDotNet.Cil.FlowControl.Call);
+            Cpobj = Register("cpobj", OpCodeCategories.Cpobj, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Ldobj = Register("ldobj", OpCodeCategories.Ldobj, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Ldstr = Register("ldstr", OpCodeCategories.Ldstr, OperandType.InlineString, CilDotNet.Cil.FlowControl.Next);
+            Newobj = Register("newobj", OpCodeCategories.Newobj, OperandType.InlineMethod, CilDotNet.Cil.FlowControl.Call);
+            Castclass = Register("castclass", OpCodeCategories.Castclass, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Isinst = Register("isinst", OpCodeCategories.Isinst, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            ConvRUn = Register("conv.r.un", OpCodeCategories.ConvRUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Unbox = Register("unbox", OpCodeCategories.Unbox, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Throw = Register("throw", OpCodeCategories.Throw, OperandType.None, CilDotNet.Cil.FlowControl.Throw);
+            Ldfld = Register("ldfld", OpCodeCategories.Ldfld, OperandType.InlineField, CilDotNet.Cil.FlowControl.Next);
+            Ldflda = Register("ldflda", OpCodeCategories.Ldflda, OperandType.InlineField, CilDotNet.Cil.FlowControl.Next);
+            Stfld = Register("stfld", OpCodeCategories.Stfld, OperandType.InlineField, CilDotNet.Cil.FlowControl.Next);
+            Ldsfld = Register("ldsfld", OpCodeCategories.Ldsfld, OperandType.InlineField, CilDotNet.Cil.FlowControl.Next);
+            Ldsflda = Register("ldsflda", OpCodeCategories.Ldsflda, OperandType.InlineField, CilDotNet.Cil.FlowControl.Next);
+            Stsfld = Register("stsfld", OpCodeCategories.Stsfld, OperandType.InlineField, CilDotNet.Cil.FlowControl.Next);
+            Stobj = Register("stobj", OpCodeCategories.Stobj, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI1Un = Register("conv.ovf.i1.un", OpCodeCategories.ConvOvfI1Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI2Un = Register("conv.ovf.i2.un", OpCodeCategories.ConvOvfI2Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI4Un = Register("conv.ovf.i4.un", OpCodeCategories.ConvOvfI4Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI8Un = Register("conv.ovf.i8.un", OpCodeCategories.ConvOvfI8Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU1Un = Register("conv.ovf.u1.un", OpCodeCategories.ConvOvfU1Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU2Un = Register("conv.ovf.u2.un", OpCodeCategories.ConvOvfU2Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU4Un = Register("conv.ovf.u4.un", OpCodeCategories.ConvOvfU4Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU8Un = Register("conv.ovf.u8.un", OpCodeCategories.ConvOvfU8Un, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfIUn = Register("conv.ovf.i.un", OpCodeCategories.ConvOvfIUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfUUn = Register("conv.ovf.u.un", OpCodeCategories.ConvOvfUUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Box = Register("box", OpCodeCategories.Box, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Newarr = Register("newarr", OpCodeCategories.Newarr, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Ldlen = Register("ldlen", OpCodeCategories.Ldlen, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldelema = Register("ldelema", OpCodeCategories.Ldelema, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            LdelemI1 = Register("ldelem.i1", OpCodeCategories.LdelemI1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemU1 = Register("ldelem.u1", OpCodeCategories.LdelemU1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemI2 = Register("ldelem.i2", OpCodeCategories.LdelemI2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemU2 = Register("ldelem.u2", OpCodeCategories.LdelemU2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemI4 = Register("ldelem.i4", OpCodeCategories.LdelemI4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemU4 = Register("ldelem.u4", OpCodeCategories.LdelemU4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemI8 = Register("ldelem.i8", OpCodeCategories.LdelemI8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemI = Register("ldelem.i", OpCodeCategories.LdelemI, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemR4 = Register("ldelem.r4", OpCodeCategories.LdelemR4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemR8 = Register("ldelem.r8", OpCodeCategories.LdelemR8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemRef = Register("ldelem.ref", OpCodeCategories.LdelemRef, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemI = Register("stelem.i", OpCodeCategories.StelemI, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemI1 = Register("stelem.i1", OpCodeCategories.StelemI1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemI2 = Register("stelem.i2", OpCodeCategories.StelemI2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemI4 = Register("stelem.i4", OpCodeCategories.StelemI4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemI8 = Register("stelem.i8", OpCodeCategories.StelemI8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemR4 = Register("stelem.r4", OpCodeCategories.StelemR4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemR8 = Register("stelem.r8", OpCodeCategories.StelemR8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            StelemRef = Register("stelem.ref", OpCodeCategories.StelemRef, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            LdelemAny = Register("ldelem.any", OpCodeCategories.LdelemAny, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            StelemAny = Register("stelem.any", OpCodeCategories.StelemAny, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            UnboxAny = Register("unbox.any", OpCodeCategories.UnboxAny, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI1 = Register("conv.ovf.i1", OpCodeCategories.ConvOvfI1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU1 = Register("conv.ovf.u1", OpCodeCategories.ConvOvfU1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI2 = Register("conv.ovf.i2", OpCodeCategories.ConvOvfI2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU2 = Register("conv.ovf.u2", OpCodeCategories.ConvOvfU2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI4 = Register("conv.ovf.i4", OpCodeCategories.ConvOvfI4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU4 = Register("conv.ovf.u4", OpCodeCategories.ConvOvfU4, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI8 = Register("conv.ovf.i8", OpCodeCategories.ConvOvfI8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU8 = Register("conv.ovf.u8", OpCodeCategories.ConvOvfU8, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Refanyval = Register("refanyval", OpCodeCategories.Refanyval, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Ckfinite = Register("ckfinite", OpCodeCategories.Ckfinite, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Mkrefany = Register("mkrefany", OpCodeCategories.Mkrefany, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Ldtoken = Register("ldtoken", OpCodeCategories.Ldtoken, OperandType.InlineTok, CilDotNet.Cil.FlowControl.Next);
+            ConvU2 = Register("conv.u2", OpCodeCategories.ConvU2, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvU1 = Register("conv.u1", OpCodeCategories.ConvU1, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvI = Register("conv.i", OpCodeCategories.ConvI, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfI = Register("conv.ovf.i", OpCodeCategories.ConvOvfI, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            ConvOvfU = Register("conv.ovf.u", OpCodeCategories.ConvOvfU, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            AddOvf = Register("add.ovf", OpCodeCategories.AddOvf, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            AddOvfUn = Register("add.ovf.un", OpCodeCategories.AddOvfUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            MulOvf = Register("mul.ovf", OpCodeCategories.MulOvf, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            MulOvfUn = Register("mul.ovf.un", OpCodeCategories.MulOvfUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            SubOvf = Register("sub.ovf", OpCodeCategories.SubOvf, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            SubOvfUn = Register("sub.ovf.un", OpCodeCategories.SubOvfUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Endfinally = Register("endfinally", OpCodeCategories.Endfinally, OperandType.None, CilDotNet.Cil.FlowControl.Return);
+            Leave = Register("leave", OpCodeCategories.Leave, OperandType.InlineBrTarget, CilDotNet.Cil.FlowControl.Branch);
+            LeaveS = Register("leave.s", OpCodeCategories.LeaveS, OperandType.ShortInlineBrTarget, CilDotNet.Cil.FlowControl.Branch);
+            ConvU = Register("conv.u", OpCodeCategories.ConvU, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Arglist = Register("arglist", OpCodeCategories.Arglist, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ceq = Register("ceq", OpCodeCategories.Ceq, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Cgt = Register("cgt", OpCodeCategories.Cgt, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            CgtUn = Register("cgt.un", OpCodeCategories.CgtUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Clt = Register("clt", OpCodeCategories.Clt, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            CltUn = Register("clt.un", OpCodeCategories.CltUn, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Ldftn = Register("ldftn", OpCodeCategories.Ldftn, OperandType.InlineMethod, CilDotNet.Cil.FlowControl.Next);
+            Ldvirtftn = Register("ldvirtftn", OpCodeCategories.Ldvirtftn, OperandType.InlineMethod, CilDotNet.Cil.FlowControl.Next);
+            Ldarg = Register("ldarg", OpCodeCategories.Ldarg, OperandType.InlineParam, CilDotNet.Cil.FlowControl.Next);
+            Ldarga = Register("ldarga", OpCodeCategories.Ldarga, OperandType.InlineParam, CilDotNet.Cil.FlowControl.Next);
+            Starg = Register("starg", OpCodeCategories.Starg, OperandType.InlineParam, CilDotNet.Cil.FlowControl.Next);
+            Ldloc = Register("ldloc", OpCodeCategories.Ldloc, OperandType.InlineVar, CilDotNet.Cil.FlowControl.Next);
+            Ldloca = Register("ldloca", OpCodeCategories.Ldloca, OperandType.InlineVar, CilDotNet.Cil.FlowControl.Next);
+            Stloc = Register("stloc", OpCodeCategories.Stloc, OperandType.InlineVar, CilDotNet.Cil.FlowControl.Next);
+            Localloc = Register("localloc", OpCodeCategories.Localloc, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Endfilter = Register("endfilter", OpCodeCategories.Endfilter, OperandType.None, CilDotNet.Cil.FlowControl.Return);
+            Unaligned = Register("unaligned.", OpCodeCategories.Unaligned, OperandType.ShortInlineI, CilDotNet.Cil.FlowControl.Meta);
+            Volatile = Register("volatile.", OpCodeCategories.Volatile, OperandType.None, CilDotNet.Cil.FlowControl.Meta);
+            Tail = Register("tail.", OpCodeCategories.Tail, OperandType.None, CilDotNet.Cil.FlowControl.Meta);
+            Initobj = Register("initobj", OpCodeCategories.Initobj, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Constrained = Register("constrained.", OpCodeCategories.Constrained, OperandType.InlineType, CilDotNet.Cil.FlowControl.Meta);
+            Cpblk = Register("cpblk", OpCodeCategories.Cpblk, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Initblk = Register("initblk", OpCodeCategories.Initblk, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Rethrow = Register("rethrow", OpCodeCategories.Rethrow, OperandType.None, CilDotNet.Cil.FlowControl.Throw);
+            Sizeof = Register("sizeof", OpCodeCategories.Sizeof, OperandType.InlineType, CilDotNet.Cil.FlowControl.Next);
+            Refanytype = Register("refanytype", OpCodeCategories.Refanytype, OperandType.None, CilDotNet.Cil.FlowControl.Next);
+            Readonly = Register("readonly.", OpCodeCategories.Readonly, OperandType.None, CilDotNet.Cil.FlowControl.Meta);
+        }
 
-        BrS = 0x2B,
-        BrfalseS = 0x2C,
-        BrtrueS = 0x2D,
-        BeqS = 0x2E,
-        BgeS = 0x2F,
-        BgtS = 0x30,
-        BleS = 0x31,
-        BltS = 0x32,
-        BneUnS = 0x33,
-        BgeUnS = 0x34,
-        BgtUnS = 0x35,
-        BleUnS = 0x36,
-        BltUnS = 0x37,
+        private static OpCode Register(string name, OpCodeCategories code, OperandType operandType, CilDotNet.Cil.FlowControl flowControl)
+        {
+            var opCode = new OpCode(name, code, operandType, flowControl);
+            opCodes[code] = opCode;
+            return opCode;
+        }
 
-        Br = 0x38,
-        Brfalse = 0x39,
-        Brtrue = 0x3A,
-        Beq = 0x3B,
-        Bge = 0x3C,
-        Bgt = 0x3D,
-        Ble = 0x3E,
-        Blt = 0x3F,
-        BneUn = 0x40,
-        BgeUn = 0x41,
-        BgtUn = 0x42,
-        BleUn = 0x43,
-        BltUn = 0x44,
-        Switch = 0x45,
+        public static OpCode? Get(OpCodeCategories code)
+        {
+            return opCodes.TryGetValue(code, out var opCode) ? opCode : null;
+        }
 
-        LdindI1 = 0x46,
-        LdindU1 = 0x47,
-        LdindI2 = 0x48,
-        LdindU2 = 0x49,
-        LdindI4 = 0x4A,
-        LdindU4 = 0x4B,
-        LdindI8 = 0x4C,
-        LdindI = 0x4D,
-        LdindR4 = 0x4E,
-        LdindR8 = 0x4F,
-        LdindRef = 0x50,
+        public static OpCode? Get(byte b1, byte b2)
+        {
+            if (b1 == 0xFE)
+            {
+                var code = (OpCodeCategories)(0xFE00 | b2);
+                return Get(code);
+            }
 
-        StindRef = 0x51,
-        StindI1 = 0x52,
-        StindI2 = 0x53,
-        StindI4 = 0x54,
-        StindI8 = 0x55,
-        StindR4 = 0x56,
-        StindR8 = 0x57,
-        StindI = 0xDF,
+            var singleCode = (OpCodeCategories)b1;
+            return Get(singleCode);
+        }
 
-
-        Add = 0x58,
-        Sub = 0x59,
-        Mul = 0x5A,
-        Div = 0x5B,
-        DivUn = 0x5C,
-        Rem = 0x5D,
-        RemUn = 0x5E,
-        And = 0x5F,
-        Or = 0x60,
-        Xor = 0x61,
-        Shl = 0x62,
-        Shr = 0x63,
-        ShrUn = 0x64,
-        Neg = 0x65,
-        Not = 0x66,
-
-        ConvI1 = 0x67,
-        ConvI2 = 0x68,
-        ConvI4 = 0x69,
-        ConvI8 = 0x6A,
-        ConvR4 = 0x6B,
-        ConvR8 = 0x6C,
-        ConvU4 = 0x6D,
-        ConvU8 = 0x6E,
-
-        Callvirt = 0x6F,
-        Cpobj = 0x70,
-        Ldobj = 0x71,
-        Ldstr = 0x72,
-        Newobj = 0x73,
-        Castclass = 0x74,
-        Isinst = 0x75,
-        ConvRUn = 0x76,
-
-        Unbox = 0x79,
-        Throw = 0x7A,
-        Ldfld = 0x7B,
-        Ldflda = 0x7C,
-        Stfld = 0x7D,
-        Ldsfld = 0x7E,
-        Ldsflda = 0x7F,
-        Stsfld = 0x80,
-        Stobj = 0x81,
-
-        ConvOvfI1Un = 0x82,
-        ConvOvfI2Un = 0x83,
-        ConvOvfI4Un = 0x84,
-        ConvOvfI8Un = 0x85,
-        ConvOvfU1Un = 0x86,
-        ConvOvfU2Un = 0x87,
-        ConvOvfU4Un = 0x88,
-        ConvOvfU8Un = 0x89,
-        ConvOvfIUn = 0x8A,
-        ConvOvfUUn = 0x8B,
-
-        Box = 0x8C,
-        Newarr = 0x8D,
-        Ldlen = 0x8E,
-        Ldelema = 0x8F,
-
-        LdelemI1 = 0x90,
-        LdelemU1 = 0x91,
-        LdelemI2 = 0x92,
-        LdelemU2 = 0x93,
-        LdelemI4 = 0x94,
-        LdelemU4 = 0x95,
-        LdelemI8 = 0x96,
-        LdelemI = 0x97,
-        LdelemR4 = 0x98,
-        LdelemR8 = 0x99,
-        LdelemRef = 0x9A,
-
-        StelemI = 0x9B,
-        StelemI1 = 0x9C,
-        StelemI2 = 0x9D,
-        StelemI4 = 0x9E,
-        StelemI8 = 0x9F,
-        StelemR4 = 0xA0,
-        StelemR8 = 0xA1,
-        StelemRef = 0xA2,
-        LdelemAny = 0xA3,
-        StelemAny = 0xA4,
-        UnboxAny = 0xA5,
-
-        ConvOvfI1 = 0xB3,
-        ConvOvfU1 = 0xB4,
-        ConvOvfI2 = 0xB5,
-        ConvOvfU2 = 0xB6,
-        ConvOvfI4 = 0xB7,
-        ConvOvfU4 = 0xB8,
-        ConvOvfI8 = 0xB9,
-        ConvOvfU8 = 0xBA,
-
-        Refanyval = 0xC2,
-        Ckfinite = 0xC3,
-
-        Mkrefany = 0xC6,
-
-        Ldtoken = 0xD0,
-        ConvU2 = 0xD1,
-        ConvU1 = 0xD2,
-        ConvI = 0xD3,
-        ConvOvfI = 0xD4,
-        ConvOvfU = 0xD5,
-        AddOvf = 0xD6,
-        AddOvfUn = 0xD7,
-        MulOvf = 0xD8,
-        MulOvfUn = 0xD9,
-        SubOvf = 0xDA,
-        SubOvfUn = 0xDB,
-        Endfinally = 0xDC,
-        Leave = 0xDD,
-        LeaveS = 0xDE,
-        ConvU = 0xE0,
-
-        //0xFE00 - 0xFE1E
-        Arglist = 0xFE00,
-        Ceq = 0xFE01,
-        Cgt = 0xFE02,
-        CgtUn = 0xFE03,
-        Clt = 0xFE04,
-        CltUn = 0xFE05,
-        Ldftn = 0xFE06,
-        Ldvirtftn = 0xFE07,
-
-        Ldarg = 0xFE09,
-        Ldarga = 0xFE0A,
-        Starg = 0xFE0B,
-        Ldloc = 0xFE0C,
-        Ldloca = 0xFE0D,
-        Stloc = 0xFE0E,
-        Localloc = 0xFE0F,
-
-        Endfilter = 0xFE11,
-        Unaligned = 0xFE12, 
-        Volatile = 0xFE13,
-        Tail = 0xFE14,     
-        Initobj = 0xFE15,
-        Constrained = 0xFE16,
-        Cpblk = 0xFE17,
-        Initblk = 0xFE18,
-
-        Rethrow = 0xFE1A,
-
-        Sizeof = 0xFE1C,
-        Refanytype = 0xFE1D,
-        Readonly = 0xFE1E,
+        public static IReadOnlyDictionary<OpCodeCategories, OpCode> All => opCodes;
     }
 }

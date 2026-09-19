@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Semicolon.Cil.Executable
+﻿namespace CilDotNet.Executable
 {
-    public class ImageBase
+    public sealed class ImageBase
     {
+        public uint Value { get; set; }
+        public bool Is64Bit { get; set; }
+
+        public ImageBase(uint value, bool is64Bit)
+        {
+            Value = value;
+            Is64Bit = is64Bit;
+        }
+
+        public override string ToString() => $"0x{Value:X}";
     }
 }

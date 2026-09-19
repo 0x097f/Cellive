@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CilDotNet
+﻿namespace CilDotNet.Executable
 {
     /// <summary>
     /// Reference : https://learn.microsoft.com/windows/win32/debug/pe-format
