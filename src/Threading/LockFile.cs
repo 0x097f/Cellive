@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Threading
+namespace Cellive.Threading
 {
     public sealed class LockFile : IDisposable
     {

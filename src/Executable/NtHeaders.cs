@@ -1,8 +1,8 @@
-﻿// NtHeaders.cs
+// NtHeaders.cs
 using System;
 using System.IO;
 
-namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     public sealed class NtHeaders
     {

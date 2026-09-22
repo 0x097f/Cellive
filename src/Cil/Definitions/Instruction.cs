@@ -1,6 +1,6 @@
-﻿using CilDotNet;
+using Cellive;
 
-namespace CilDotNet.Cil.Definitions
+namespace Cellive.Cil.Definitions
 {
     public sealed class Instruction : IInstruction
     {

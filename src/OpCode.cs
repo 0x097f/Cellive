@@ -1,14 +1,14 @@
-﻿namespace CilDotNet
+namespace Cellive
 {
     public sealed class OpCode
     {
         public string Name { get; }
         public OpCodeCategories Code { get; }
         public OperandType OperandType { get; }
-        public CilDotNet.Cil.FlowControl FlowControl { get; }
+        public Cellive.Cil.FlowControl FlowControl { get; }
         public int Size { get; }
 
-        public OpCode(string name, OpCodeCategories code, OperandType operandType, CilDotNet.Cil.FlowControl flowControl)
+        public OpCode(string name, OpCodeCategories code, OperandType operandType, Cellive.Cil.FlowControl flowControl)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Code = code;

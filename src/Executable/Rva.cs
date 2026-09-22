@@ -1,8 +1,8 @@
-﻿namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     public readonly struct Rva : IEquatable<Rva>
     {
-        private static List<SectionInfo>? _sections;
+        private static List<SectionInfo>? sc;
 
         public uint Value { get; }
 
@@ -13,19 +13,18 @@
 
         public static void SetSections(List<SectionInfo> sections)
         {
-            _sections = sections;
+            sc = sections;
         }
 
         public BinaryOffset ToFileOffset()
         {
-            if (_sections == null)
+            if (sc == null)
             {
-                //Y'all need to call Rva.SetSections first
-                //Uh in case some unknown error.
+                //You need to call Rva.SetSections first
                 throw new InvalidOperationException("Sections not set.");
             }
 
-            foreach (var section in _sections)
+            foreach (var section in sc)
             {
                 var size = Math.Max(section.VirtualSize, section.SizeOfRawData);
                 if (Value >= section.VirtualAddress && Value < section.VirtualAddress + size)
@@ -39,13 +38,13 @@
 
         public bool TryToFileOffset(out BinaryOffset offset)
         {
-            if (_sections == null)
+            if (sc == null)
             {
                 offset = default;
                 return false;
             }
 
-            foreach (var section in _sections)
+            foreach (var section in sc)
             {
                 if (Value >= section.VirtualAddress &&
                     Value < section.VirtualAddress + section.VirtualSize)
@@ -64,8 +63,8 @@
         {
             get
             {
-                if (_sections == null) return null;
-                foreach (var section in _sections)
+                if (sc == null) return null;
+                foreach (var section in sc)
                 {
                     var size = Math.Max(section.VirtualSize, section.SizeOfRawData);
                     if (Value >= section.VirtualAddress && Value < section.VirtualAddress + size)

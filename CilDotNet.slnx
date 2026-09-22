@@ -1,6 +1,6 @@
 <Solution>
-  <VirtualFolder Name="Semicolon.Cil" Path="src" />
-  <Project Path="src/CilDotNet.csproj" />
+  <VirtualFolder Name="Cellive" Path="src" />
+  <Project Path="src/Cellive.csproj" />
   <Configuration>
     <Platform Name="Any CPU" />
   </Configuration>

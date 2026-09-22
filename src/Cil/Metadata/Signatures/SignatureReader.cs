@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace CilDotNet.Cil.Metadata.Signatures
+namespace Cellive.Cil.Metadata.Signatures
 {
     public sealed class SignatureReader
     {

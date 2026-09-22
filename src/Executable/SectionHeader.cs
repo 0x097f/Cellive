@@ -1,6 +1,6 @@
-﻿using System.IO;
+using System.IO;
 
-namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     public sealed class SectionHeader
     {

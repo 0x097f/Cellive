@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     [Flags]
     public enum Architectures : ushort

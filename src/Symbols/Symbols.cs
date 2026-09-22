@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Symbols
+namespace Cellive.Symbols
 {
     public class Symbols
     {

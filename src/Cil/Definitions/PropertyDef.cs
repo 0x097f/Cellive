@@ -1,6 +1,6 @@
-﻿using CilDotNet.Cil.Metadata;
+using Cellive.Cil.Metadata;
 
-namespace CilDotNet.Cil.Definitions
+namespace Cellive.Cil.Definitions
 {
     public sealed class PropertyDef : IPropertyDef
     {

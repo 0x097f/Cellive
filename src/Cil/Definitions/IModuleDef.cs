@@ -1,7 +1,7 @@
-﻿using CilDotNet.Cil.Metadata;
-using CilDotNet.Executable;
+using Cellive.Cil.Metadata;
+using Cellive.Executable;
 
-namespace CilDotNet.Cil.Definitions
+namespace Cellive.Cil.Definitions
 {
     public interface IModuleDef
     {

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CilDotNet.EmbeddedResource
+namespace Cellive.EmbeddedResource
 {
     public sealed class EmbeddedResourceEntry : IEmbeddedResource
     {

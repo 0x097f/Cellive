@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>1.0.1</Version>
+    <VersionNumber>$([System.String]::Copy('$(Version)').Replace('.', ''))</VersionNumber>
+    
+    <AssemblyName>cellive$(VersionNumber)</AssemblyName>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <NoWarn>$(NoWarn);CS0168;CS0219</NoWarn>
+    
+    <!-- Package Id -->
+    <PackageId>Cellive</PackageId>
+    <RootNamespace>Cellive</RootNamespace>
+    <DebugType>portable</DebugType>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Authors>0x097f</Authors>
+    <Description>A Cil Manipulation library</Description>
+
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <DefineConstants>$(DefineConstants);LINUX</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <DefineConstants>$(DefineConstants);MACOS</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Iced" Version="1.21.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,7 @@
-﻿using CilDotNet.Cil.Metadata;
+using Cellive.Cil.Metadata;
 using static System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder;
 
-namespace CilDotNet.Cil.Definitions
+namespace Cellive.Cil.Definitions
 {
     public interface IMethodDef
     {

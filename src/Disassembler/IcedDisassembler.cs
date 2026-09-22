@@ -1,5 +1,5 @@
-﻿//Use Iced.Intel
-namespace CilDotNet.Disassembler
+//Use Iced.Intel
+namespace Cellive.Disassembler
 {
     public sealed class IcedDisassembler : IDisassembler
     {

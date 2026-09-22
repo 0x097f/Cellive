@@ -1,4 +1,4 @@
-namespace CilDotNet.Deobfuscation
+namespace Cellive.Deobfuscation
 {
     public interface IDeobfuscator
     {

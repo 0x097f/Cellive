@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 
-namespace CilDotNet.Cil.Metadata.Tables
+namespace Cellive.Cil.Metadata.Tables
 {
     public sealed class PropertyMapTable
     {

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CilDotNet.Cil.Metadata
+namespace Cellive.Cil.Metadata
 {
     public sealed class MetadataHeader
     {

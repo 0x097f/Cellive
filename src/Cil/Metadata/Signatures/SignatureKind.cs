@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Cil.Metadata.Signatures
+namespace Cellive.Cil.Metadata.Signatures
 {
     public enum SignatureKind : byte
     {

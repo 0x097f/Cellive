@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CilDotNet.EmbeddedResource
+namespace Cellive.EmbeddedResource
 {
     public interface IEmbeddedResource
     {

@@ -1,7 +1,6 @@
-﻿namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     /// <summary>
-    /// Characteristics flags.
     /// Reference: https://docs.microsoft.com/en-us/windows/win32/debug/pe-format
     /// </summary>
     [Flags]

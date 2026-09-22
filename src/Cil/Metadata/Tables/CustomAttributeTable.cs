@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Cil.Metadata.Tables
+namespace Cellive.Cil.Metadata.Tables
 {
     public sealed class CustomAttributeTable
     {

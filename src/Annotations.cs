@@ -1,4 +1,4 @@
-﻿namespace CilDotNet
+namespace Cellive
 {
     public class Annotations
     {
@@ -16,7 +16,7 @@
 
         public string GenHeader()
         {
-            return $"// Generate by CilDotNet\n//Timestamp:{Timestamp}";
+            return $"// Generate by Cellive\n//Timestamp:{Timestamp}";
         }
 
         public string GenAny(string msg)

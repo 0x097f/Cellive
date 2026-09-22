@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Cil.Metadata
+namespace Cellive.Cil.Metadata
 {
     public sealed class UserStringHeap
     {

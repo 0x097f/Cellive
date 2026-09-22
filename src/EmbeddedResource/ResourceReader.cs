@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.EmbeddedResource
+namespace Cellive.EmbeddedResource
 {
     public sealed class ResourceReader : IEmbeddedResourceReader, IDisposable
     {

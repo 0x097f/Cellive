@@ -1,4 +1,4 @@
-namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     public interface IExecutable
     {

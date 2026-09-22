@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Executable
+namespace Cellive.Executable
 {
     public static class DirectoryIndex
     {

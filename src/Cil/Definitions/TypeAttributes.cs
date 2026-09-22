@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Cil.Definitions
+namespace Cellive.Cil.Definitions
 {
     /// <summary>
     ///Type attributes

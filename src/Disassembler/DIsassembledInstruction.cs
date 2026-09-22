@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Disassembler
+namespace Cellive.Disassembler
 {
     public sealed class DisassembledInstruction
     {

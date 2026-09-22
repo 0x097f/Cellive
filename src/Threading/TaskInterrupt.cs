@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CilDotNet.Threading
+namespace Cellive.Threading
 {
     public sealed class TaskInterrupt : IDisposable
     {

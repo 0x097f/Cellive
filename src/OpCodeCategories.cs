@@ -1,4 +1,4 @@
-﻿namespace CilDotNet
+namespace Cellive
 {
     public enum OpCodeCategories : ushort
     {

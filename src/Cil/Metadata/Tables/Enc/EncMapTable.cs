@@ -1,4 +1,4 @@
-﻿namespace CilDotNet.Cil.Metadata.Tables.Enc
+namespace Cellive.Cil.Metadata.Tables.Enc
 {
     public sealed class EncMapTable
     {
